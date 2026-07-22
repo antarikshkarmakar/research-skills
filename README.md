@@ -35,7 +35,9 @@ researchSkills/
 │       └── template.md              # Analytical Decision Record Template
 ├── adapters/
 │   ├── claude/
-│   │   └── SKILL.md                 # Claude Skill Definition (YAML + System + Checklist)
+│   │   ├── SKILL.md                 # Claude Skill Definition (YAML + System + Checklist + Triggers)
+│   │   └── references/
+│   │       └── protocol-v4.8.md     # Full 21-section canonical protocol (binding source-of-truth)
 │   ├── openai/
 │   │   └── system_instructions.md   # ChatGPT / Custom GPT System Prompt
 │   ├── gemini/
@@ -54,8 +56,21 @@ researchSkills/
 
 ## 🚀 Quick Start & Platform Deployment
 
-### 1. Claude (Claude Desktop / Claude Web / Anthropic API)
-Copy the contents of `adapters/claude/SKILL.md` into your Claude Desktop `skills` folder or project prompt.
+### 1. Claude
+
+**Claude Code (CLI):**
+```bash
+mkdir -p ~/.claude/skills/universal-research-protocol/references
+cp adapters/claude/SKILL.md ~/.claude/skills/universal-research-protocol/
+cp adapters/claude/references/protocol-v4.8.md ~/.claude/skills/universal-research-protocol/references/
+```
+Restart your session so the skill loads. It auto-triggers on requests matching its description (case-study research, fact-checking, evidence extraction), or invoke it by name if your harness supports that.
+
+**Claude Desktop / Claude Web / Anthropic API:** upload both `adapters/claude/SKILL.md` and `adapters/claude/references/protocol-v4.8.md` as project files (or paste `SKILL.md` into a system prompt) — the `references/protocol-v4.8.md` pointer only resolves if that file is attached alongside it.
+
+**Using it:**
+- Trigger with a case-study/fact-checking request, or the tokens `@HARD FAIL@`, `@STATUS@` / `@STATUS,n@`.
+- It runs an 8-step pipeline: Illusion & Reality Check → 5 scored candidate cases → source verification → PDF upload → evidence-pack approval → narrative draft → evidence trace → lock & MyLib reference export. Each step waits for your explicit approval before advancing — it will not skip ahead.
 
 ### 2. OpenAI (ChatGPT Custom GPTs / Assistants API)
 Copy `adapters/openai/system_instructions.md` into the **Instructions** box of your Custom GPT or Assistant. Attach `core-protocol.md` as Knowledge if required.
