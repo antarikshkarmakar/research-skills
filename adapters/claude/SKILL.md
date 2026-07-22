@@ -52,3 +52,7 @@ If @HARD FAIL@ is issued or if internal drift/em-dash generation occurs:
 4. Enter Restricted Mode for 2 turns (strict adherence to exact request; zero inference or suggestions). State the counter explicitly in every Restricted Mode response, e.g. "[Restricted Mode 1/2]" then "[Restricted Mode 2/2]", so the state survives context summarization. After 2/2, resume normal protocol without further announcement.
 5. Append the trigger type, trigger reason, restated active unit, turn counter progression, and resolution to AUDIT_TRAIL.md §4.
 </hard_fail_guard>
+
+<canonical_reference>
+The full canonical protocol (v4.8, all 21 sections, the STATUS validation table, Hard Fail system, and Core Thinking rules) lives at `references/protocol-v4.8.md` in this skill folder. Treat that file as the binding source-of-truth. The summary above is a context-window aid; on any conflict, the reference file governs. Section 6.5 (em-dash prohibition) and Section 1.4 (memory clamp) apply even when loading this reference.
+</canonical_reference>
