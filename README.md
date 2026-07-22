@@ -78,14 +78,14 @@ Restart your session so the skill loads. It auto-triggers on requests matching i
 1. Open ChatGPT → **Explore GPTs** → **Create**.
 2. In the **Configure** tab, set the GPT **Name** and **Description** (e.g. "Universal Executive Research Protocol - case-study evidence synthesis with hard-fail safety").
 3. Paste the entire contents of `adapters/openai/system_instructions.md` into the **Instructions** field.
-4. Under **Knowledge**, upload any project-specific reference files (your `MEMORY.md`, `Handoff.md`, prior `AUDIT_TRAIL.md`, source PDFs) so the GPT can ground responses in your corpus. Optional but recommended.
+4. Under **Knowledge**, upload `gist.md` (required for the `@STATUS@` command to work — it holds the full Section 18/20 spec) plus any project-specific reference files (your `MEMORY.md`, `Handoff.md`, prior `AUDIT_TRAIL.md`, source PDFs) so the GPT can ground responses in your corpus.
 5. Under **Capabilities**, leave **Web Browsing** and **DALL-E** off to honour the no-hallucination rule. Code Interpreter is safe to leave on.
 6. **Save** and start a new conversation. The 8-step pipeline and `@HARD FAIL@` / `@STATUS@` tokens become active immediately.
 
 **Assistants API / OpenAI Platform (programmatic):**
 1. In the OpenAI dashboard, create a new Assistant.
 2. Paste `adapters/openai/system_instructions.md` into the **System instructions** field.
-3. Enable the **File search** tool and attach the same `core-protocol.md` plus any `memory/` files you want the assistant to retrieve from.
+3. Enable the **File search** tool and attach `core-protocol.md` and `gist.md` (the latter required for `@STATUS@` to work) plus any `memory/` files you want the assistant to retrieve from.
 4. Create a Thread and run it. The assistant enforces stateless evidence containment, em-dash ban, paragraph locking, and the 8-step pipeline automatically.
 
 **Using it:**
@@ -99,14 +99,14 @@ Restart your session so the skill loads. It auto-triggers on requests matching i
 1. Open [aistudio.google.com](https://aistudio.google.com) and create a new **System Instructions** prompt (or open the **Structured prompt** view if you want section labels).
 2. Paste the entire contents of `adapters/gemini/system_instructions.md` into the **System Instructions** field.
 3. Set **Temperature** to a low value (0.1-0.3) to reduce drift, and **Top-P** to a similarly conservative range.
-4. Under **Grounding**, attach `core-protocol.md` and any project-specific files (`MEMORY.md`, `Handoff.md`, `AUDIT_TRAIL.md`, source PDFs) so Gemini grounds outputs in your corpus.
+4. Attach `core-protocol.md` and `gist.md` (the latter required for `@STATUS@` to work) plus any project-specific files (`MEMORY.md`, `Handoff.md`, `AUDIT_TRAIL.md`, source PDFs) as context so Gemini grounds outputs in your corpus.
 5. Run a test prompt to confirm the 8-step pipeline, em-dash ban, and `@HARD FAIL@` / `@STATUS@` tokens are honoured before using it on real research.
 
 **Custom Gems (gemini.google.com, no code):**
 1. Open Gemini → **Gems** → **Create a new Gem**.
 2. Set the Gem **Name** and a short description matching the protocol.
 3. Paste the contents of `adapters/gemini/system_instructions.md` into the **Instructions** field.
-4. Optionally upload reference files via the file attachment control at the start of each chat (Gems do not persist file attachments across sessions, so re-attach `core-protocol.md` and any lifecycle files each time).
+4. Optionally upload reference files via the file attachment control at the start of each chat (Gems do not persist file attachments across sessions, so re-attach `core-protocol.md`, `gist.md`, and any lifecycle files each time).
 5. Save and start chatting. The Gem enforces the same stateless evidence containment, em-dash ban, paragraph locking, and 8-step pipeline as the Claude and OpenAI adapters.
 
 **Using it:**

@@ -39,3 +39,6 @@ If the command `@HARD FAIL@` is issued or auto-triggered:
 2. Emit: `"Hard fail acknowledged. Re-establishing context."`
 3. Restate last locked text and active target unit verbatim.
 4. Enter Restricted Mode for 2 turns (strict line execution; zero inference or suggestions). State counter explicitly in every response: `[Restricted Mode 1/2]` then `[Restricted Mode 2/2]`.
+
+## STATUS COMMAND
+If the user sends `@STATUS@` or `@STATUS,n@` (n = a positive integer window; default window if omitted), run a compliance/status audit. This is a diagnostic command, not a Hard Fail trigger. Its exact trigger rule and output table format are not summarized here: read `gist.md` Sections 18 and 20 (attach `gist.md` under Grounding/file attachment alongside `core-protocol.md` so it is available) and reproduce that structure exactly.
