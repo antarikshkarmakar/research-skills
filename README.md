@@ -119,6 +119,42 @@ Upload your primary source PDFs into NotebookLM, then paste `adapters/notebooklm
 
 ---
 
+## 🔄 Step-by-Step Usage Execution Flow
+
+```mermaid
+sequenceDiagram
+    autonumber
+    actor Researcher
+    participant Agent as Research AI Skill
+    participant Web as Open Web Search
+    participant PDF as Source PDFs
+
+    Researcher->>Agent: Step 1: Submit Illusion & Reality Check
+    Agent->>Researcher: Step 2: Propose 5 Candidate Cases (Scored 0-5) + Search Titles
+    Researcher->>Web: Step 3: Search using Search Titles & confirm verified links
+    Researcher->>Agent: Step 3: Confirm verified candidate selections
+    Researcher->>PDF: Step 4: Upload source PDFs (Admissible Evidence)
+    Agent->>Researcher: Step 5: Output Evidence Extraction Pack (Quoted Handles)
+    Researcher->>Agent: Step 5: Approve Evidence Pack
+    Agent->>Researcher: Step 6: Draft single-paragraph narrative
+    Agent->>Researcher: Step 7: Output Sentence Evidence Trace
+    Researcher->>Agent: Step 8: Approve & Lock Paragraph
+    Agent->>Researcher: Step 8: Output MyLib References & Update Handoff.md
+```
+
+### Pipeline Execution Summary
+
+1. **Step 1 — Input Illusion & Reality**: Provide the mistaken belief (*Illusion*) and real mechanism (*Reality Check*).
+2. **Step 2 — Scored Candidate Cases**: The agent proposes up to 5 candidate cases scored 0-5 across 7 criteria (Relevance, Recency, Impact, Causal Clarity, etc.), plus 3 Search Titles and Source Archetype Pointers.
+3. **Step 3 — User Verification**: Search for open-access evidence using Search Titles. Confirm which candidates survive. *(If 0 survive, the agent halts with a refusal script).*
+4. **Step 4 — PDF Evidence Upload**: Upload full-text PDFs for verified candidates. These PDFs become the sole admissible evidence.
+5. **Step 5 — Evidence Extraction Pack**: The agent extracts verbatim text/paraphrases with quoted handles (first 6-8 words) mapped to harm anchors. *Waits for your explicit approval.*
+6. **Step 6 — Narrative Drafting**: The agent drafts a single structured paragraph per case drawing exclusively from approved quote handles.
+7. **Step 7 — Sentence Evidence Trace**: The agent outputs a sentence-by-sentence mapping showing exact source quote handle coordinates for every claim.
+8. **Step 8 — Review, Locking & Citation Export**: On approval, the paragraph is locked, ready-to-paste MyLib reference fields (Author, Title, Outlet, Year, URL) are exported, and `Handoff.md` is updated.
+
+---
+
 ## 📜 Lifecycle Management
 
 - **Memory**: Update `MEMORY.md` whenever an Illusion/Reality check is ingested or a paragraph is locked.
@@ -129,3 +165,4 @@ Upload your primary source PDFs into NotebookLM, then paste `adapters/notebooklm
 
 ## 📜 License & Acknowledgments
 Based on Protocol v4.8 for Executive Digital Transformation Insights & Evidence Synthesis. Inspired by [antarikshSkills](https://github.com/antarikshkarmakar/antarikshSkills).
+
