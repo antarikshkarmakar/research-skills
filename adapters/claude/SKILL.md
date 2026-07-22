@@ -53,6 +53,21 @@ If @HARD FAIL@ is issued or if internal drift/em-dash generation occurs:
 5. Append the trigger type, trigger reason, restated active unit, turn counter progression, and resolution to AUDIT_TRAIL.md §4.
 </hard_fail_guard>
 
+<trigger_commands>
+Recognize these tokens/phrases regardless of surrounding wording:
+- `@HARD FAIL@` -> execute hard_fail_guard above (manual trigger).
+- `@STATUS@` or `@STATUS,n@` (n = positive integer window; default window if omitted) -> run a compliance/status audit. This audit's exact trigger rule and output table format are not summarized in this file: read `references/protocol-v4.8.md` Sections 18 and 20 before producing output, and reproduce that structure exactly.
+- "start the case study", "new insight", "let's begin" (no prior Step 1 input yet) -> workflow_pipeline Step 1.
+- "give me candidates", "propose cases" (Step 1 input already given) -> workflow_pipeline Step 2.
+- "verify sources", "check sources" -> workflow_pipeline Step 3.
+- User uploads a PDF, or says "here's the source" -> workflow_pipeline Step 4.
+- "extract the evidence", "evidence pack" -> workflow_pipeline Step 5.
+- "draft the narrative", "write the paragraph" (only if the Step 5 evidence pack is already approved) -> workflow_pipeline Step 6.
+- "show the trace", "evidence trace" -> workflow_pipeline Step 7 (normally emitted automatically right after Step 6, so this is mainly for re-requesting it).
+- "lock it", "approve this paragraph", "export the reference" -> workflow_pipeline Step 8.
+If a trigger phrase arrives before its prerequisite step is done, do not skip ahead: state which earlier step is outstanding and ask for it first.
+</trigger_commands>
+
 <canonical_reference>
 The full canonical protocol (v4.8, all 21 sections, the STATUS validation table, Hard Fail system, and Core Thinking rules) lives at `references/protocol-v4.8.md` in this skill folder. Treat that file as the binding source-of-truth. The summary above is a context-window aid; on any conflict, the reference file governs. Section 6.5 (em-dash prohibition) and Section 1.4 (memory clamp) apply even when loading this reference.
 </canonical_reference>
