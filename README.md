@@ -2,17 +2,18 @@
 
 A platform-agnostic, hyper-rigorous AI research skill suite designed for high-stakes executive research, evidence verification, case-study narrative synthesis, and fact-checking.
 
-Engineered for seamless execution across **Claude**, **OpenAI (ChatGPT / Custom GPTs)**, **Gemini**, and **NotebookLM**.
+Engineered for seamless execution across **Claude**, **OpenAI (ChatGPT / Custom GPTs)**, **Gemini**, and **NotebookLM**, featuring second-brain memory indexing, session handoffs, interactive walkthroughs, and immutable audit logs.
 
 ---
 
 ## 🌟 Core Features
 
-- **Stateless Memory Clamp & Evidence Containment**: Strict anti-hallucination guardrails that restrict reasoning to user-provided PDFs, open-access sources, or verified extractions.
-- **8-Step Case Study Workflow**: Structured pipeline from Illusion & Reality framing to candidate case list generation, source verification, PDF extraction, narrative drafting, and line-by-line evidence tracing.
-- **Board-Ready Persona & Voice**: Executive-level, authoritative, non-fluffy, non-dramatic output with strict prohibition on consultant filler and em dashes.
+- **Stateless Memory Clamp & Second Brain Indexing (`MEMORY.md`)**: Restricts reasoning strictly to user-provided PDFs, open-access sources, or verified extractions, while indexing active context across turns.
+- **Session Handoff System (`Handoff.md`)**: Preserves pipeline stage, active target unit, and locked paragraphs during turn transitions or subagent handoffs.
+- **8-Step Case Study Workflow & Walkthrough (`workflows/research-walkthrough.md`)**: Structured pipeline from Illusion & Reality framing to candidate case list generation, source verification, PDF extraction, narrative drafting, and line-by-line evidence tracing.
+- **Immutable Audit Trail & ADRs (`AUDIT_TRAIL.md` & `memory/adr/`)**: Complete historical audit log documenting candidate case scores (0-5 matrix), source verification logs, quoted handle traces, and Analytical Decision Records.
+- **Board-Ready Persona & Voice**: Executive-level, authoritative, non-fluffy, non-dramatic output with strict prohibition on consultant filler and em dashes (`—`).
 - **Multi-Platform Adapters**: Tailored formatting for Claude Skills (`SKILL.md`), OpenAI System Prompts, Gemini AI Studio Instructions, and NotebookLM Source Prompts.
-- **Specialized Workflows**: Modules for paper fact-checking, parallel deep research, executive insight generation, and slide deck structuring.
 
 ---
 
@@ -24,9 +25,17 @@ researchSkills/
 ├── ref.md                           # Reference Skill Registries
 ├── README.md                        # Master Documentation & Setup Guide
 ├── core-protocol.md                 # Core Platform-Agnostic Protocol Engine
+├── MEMORY.md                        # Universal Second Brain Research Index
+├── Handoff.md                       # Session State Handoff & Transition Template
+├── AUDIT_TRAIL.md                   # Immutable Research Decision & Scoring Register
+├── memory/
+│   ├── sources-index.md             # Verified Sources & PDF Evidence Catalog
+│   ├── observations.md              # Research Protocol Observations & Process Log
+│   └── adr/
+│       └── template.md              # Analytical Decision Record Template
 ├── adapters/
 │   ├── claude/
-│   │   └── SKILL.md                 # Claude Skill Definition (YAML Frontmatter + XML Blocks)
+│   │   └── SKILL.md                 # Claude Skill Definition (YAML + System + Checklist)
 │   ├── openai/
 │   │   └── system_instructions.md   # ChatGPT / Custom GPT System Prompt
 │   ├── gemini/
@@ -34,10 +43,11 @@ researchSkills/
 │   └── notebooklm/
 │       └── source_guide.md          # NotebookLM Grounded Source & Prompt Guide
 └── workflows/
-    ├── paper-fact-checker.md        # Claim verification & evidence mapping
+    ├── paper-fact-checker.md        # Claim verification & audit matrix
     ├── parallel-deep-research.md    # Multi-angle query decomposition & synthesis
     ├── executive-insight-generator.md # Board mirror-questions & provocative insights
-    └── paper-slide-deck.md          # Research to presentation deck workflow
+    ├── paper-slide-deck.md          # Research to presentation deck workflow
+    └── research-walkthrough.md      # Progress dashboard & interactive walkthrough
 ```
 
 ---
@@ -45,7 +55,7 @@ researchSkills/
 ## 🚀 Quick Start & Platform Deployment
 
 ### 1. Claude (Claude Desktop / Claude Web / Anthropic API)
-Copy the contents of `adapters/claude/SKILL.md` into your Claude Desktop `skills` folder or upload as a project file / system prompt.
+Copy the contents of `adapters/claude/SKILL.md` into your Claude Desktop `skills` folder or project prompt.
 
 ### 2. OpenAI (ChatGPT Custom GPTs / Assistants API)
 Copy `adapters/openai/system_instructions.md` into the **Instructions** box of your Custom GPT or Assistant. Attach `core-protocol.md` as Knowledge if required.
@@ -54,9 +64,17 @@ Copy `adapters/openai/system_instructions.md` into the **Instructions** box of y
 Copy `adapters/gemini/system_instructions.md` into System Instructions in Google AI Studio or your custom Gem configuration.
 
 ### 4. NotebookLM (Google NotebookLM)
-Upload your primary source PDFs / papers into NotebookLM, then paste `adapters/notebooklm/source_guide.md` as the guiding prompt for note generation and grounded Q&A.
+Upload your primary source PDFs into NotebookLM, then paste `adapters/notebooklm/source_guide.md` as the guiding prompt.
+
+---
+
+## 📜 Lifecycle Management
+
+- **Memory**: Update `MEMORY.md` whenever an Illusion/Reality check is ingested or a paragraph is locked.
+- **Handoff**: Generate a `Handoff.md` block at the end of a session to pass context to the next agent.
+- **Audit**: Log candidate case scores (0-5 matrix) and quoted handle traces in `AUDIT_TRAIL.md`.
 
 ---
 
 ## 📜 License & Acknowledgments
-Based on Protocol v4.8 for Executive Digital Transformation Insights & Evidence Synthesis.
+Based on Protocol v4.8 for Executive Digital Transformation Insights & Evidence Synthesis. Inspired by [antarikshSkills](https://github.com/antarikshkarmakar/antarikshSkills).

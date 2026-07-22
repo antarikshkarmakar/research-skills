@@ -1,8 +1,8 @@
-# NotebookLM Grounded Research & Source Guide
+# NotebookLM Grounded Research, Memory & Source Guide
 
 Google NotebookLM is uniquely suited for **stateless, grounded evidence research** because its architecture restricts answers strictly to your uploaded sources (PDFs, docs, research papers, web links).
 
-This guide provides the custom guiding prompts and source preparation workflow to execute the **v4.8 Executive Research Protocol** inside NotebookLM.
+This guide provides the custom guiding prompts, source preparation workflow, and handoff tracking to execute the **v4.8 Executive Research Protocol** inside NotebookLM.
 
 ---
 
@@ -11,7 +11,7 @@ This guide provides the custom guiding prompts and source preparation workflow t
 To maintain maximum evidence integrity in NotebookLM:
 1. **Clean Source PDF Uploads**: Upload full-text research papers, regulator filings (GAO, NAO, SEC), or news articles.
 2. **Exclude Consultant Fluff**: Avoid marketing whitepapers or generic blog posts.
-3. **Structured Source Tagging**: Rename sources in NotebookLM using standard handles: `[CaseName_Outlet_Year]`.
+3. **Structured Source Tagging**: Rename sources in NotebookLM using standard handles: `[CaseName_Outlet_Year]`. Record source handles in `memory/sources-index.md`.
 
 ---
 
@@ -28,6 +28,7 @@ Analyze the uploaded sources strictly according to these non-negotiable rules:
 3. QUOTED HANDLES: For every factual claim or case observation, provide the exact quote handle (first 6 to 8 words) and source document title.
 4. EXECUTIVE TONE: Sober, direct, plain, authoritative. No consultant jargon or fluff.
 5. HARM MAPPING: When explaining organizational failure, state the tangible harm (cost, delay, risk, bureaucracy, capability loss) and explain the underlying mechanism supported by the sources.
+6. SESSION HANDOFF & AUDIT TRAIL: Note active unit isolation, track candidate scores in AUDIT_TRAIL.md, and maintain next actions in Handoff.md.
 
 Awaiting user query on Illusion & Reality Check or Case Study Extraction.
 ```
@@ -44,6 +45,6 @@ Awaiting user query on Illusion & Reality Check or Case Study Extraction.
 > **Prompt**:  
 > *"Draft a single-paragraph executive case study narrative based EXCLUSIVELY on the extracted quotes. Format: 1 opening sentence defining mistaken belief, 3 to 5 evidence-backed sentences with quoted handles, and 1 closing sentence linking failure to organizational mechanism. Do not introduce any facts outside the uploaded sources. Do not use em dashes."*
 
-### Step C: Evidence Trace Audit
+### Step C: Evidence Trace & Handoff Audit
 > **Prompt**:  
-> *"Generate a sentence-by-sentence trace table for the draft paragraph above. Map each sentence directly to its supporting quote handle from the uploaded sources. Mark any unevidenced sentence as 'NO DIRECT EVIDENCE'."*
+> *"Generate a sentence-by-sentence trace table for the draft paragraph above. Map each sentence directly to its supporting quote handle from the uploaded sources. Mark any unevidenced sentence as 'NO DIRECT EVIDENCE'. Output session handoff block for Handoff.md."*
